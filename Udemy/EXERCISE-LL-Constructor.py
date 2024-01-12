@@ -98,7 +98,56 @@ class LinkedList:
         self.length += 1
         return True
 
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length-1:
+            return self.pop()
+        prev = self.get(index-1)
+        temp = prev.next
+        prev.next = temp.next
+        temp.next = None
+        self.length -= 1
+        return temp
+            
+    def reverse(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+        # self.head, self.tail = self.tail, self.head
+        before = None
+        after = temp.next
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
+        
+    def find_middle_node(self):
+        temp = self.head
+        second = self.head
+        while second is not None and second.next is not None:
+            temp = temp.next
+            second = second.next.next
+        return temp
+ 
+ 
+def find_kth_from_end(self, value):
+     slow = self.head
+     fast = self.head
+     for _ in range(value):
+         if fast is None:
+             return None
+         else:
+             fast = fast.next
+     while (fast is not None):
+        slow = slow.next
+        fast = fast.next
+     return slow
 
+            
  
 # my_linked_list = LinkedList(4)
 
@@ -106,12 +155,25 @@ class LinkedList:
 # print('Tail:', my_linked_list.tail.value)
 # print('Length:', my_linked_list.length)
 
-my_linked_list = LinkedList(11)
-my_linked_list.append(3)
-my_linked_list.append(23)
-my_linked_list.append(7)
+# my_linked_list = LinkedList()
+# my_linked_list.append(3)
+# my_linked_list.append(23)
+# my_linked_list.append(7)
 
-my_linked_list.print_list()
-my_linked_list.set_value(1, 4)
-my_linked_list.print_list()
+# my_linked_list.print_list()
+# print()
+# my_linked_list.reverse()
+# my_linked_list.print_list()
+
+my_linked_list = LinkedList(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(5)
+
+
+k = 2
+result = find_kth_from_end(my_linked_list, k)
+
+print(result.value)  # Output: 4
                                                                                                                  
